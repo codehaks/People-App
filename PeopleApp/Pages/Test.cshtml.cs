@@ -13,7 +13,7 @@ namespace PeopleApp.Pages
         public IList<User> Output { get; set; }
         public void OnGet([FromServices] PeopleDbContext db)
         {
-            Output = db.Users.Take(50000).ToList();
+            Output = db.Users.Take(35000).ToList();
         }
     }
 }
