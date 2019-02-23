@@ -13,7 +13,7 @@ namespace PeopleApp.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<User>().HasQueryFilter(u => u.Age > 30);
+            //builder.Entity<User>().HasQueryFilter(u => u.Age > 30);
             base.OnModelCreating(builder);
         }
     }

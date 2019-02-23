@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace PeopleApp.Pages
 {
-    public class StarsModel : PageModel
+    public class IndexModel : PageModel
     {
         public void OnGet()
         {
