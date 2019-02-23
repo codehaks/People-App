@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             <tr v-for="(user,index) in users">
-                <td>{{index+1+(page-1)*10}}</td>
+                <td>{{index+1}}</td>
                 <td>{{user.givenname}}</td>
                 <td>{{user.gender}}</td>
             </tr>
@@ -25,8 +25,8 @@
 
     <h6>page : {{page}}</h6>
 
-    <button class="btn btn-sm btn-primary" v-on:click="getPrevPage">Prev</button>
-    <button class="btn btn-sm btn-primary" v-on:click="getNextPage">Next</button>
+   
+    <button class="btn btn-sm btn-primary my-5" v-on:click="getMorePage">More</button>
 
 </div>
 
@@ -43,14 +43,8 @@
             this.getPage(1)
         },
         methods: {
-            getPrevPage: function () {
-                if (this.page==1) {
-                    return;
-                }
-                this.page--;
-                this.getPage(this.page);
-            },
-            getNextPage: function () {
+           
+            getMorePage: function () {
                 this.page++;
                 this.getPage(this.page);
             },
@@ -58,7 +52,7 @@
                 var vm = this;
                 $.ajax({ url: "/api/users", data: { page: page }, method: "POST" })
                     .done(function (data) {
-                        vm.users = data;
+                        vm.users =vm.users.concat( data);
 
 
                     }).fail(function () {
