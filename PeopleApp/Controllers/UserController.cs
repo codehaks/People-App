@@ -26,5 +26,16 @@ namespace PeopleApp.Controllers
             var model = _db.Users.Skip(skip).Take(pageSize);
             return Ok(model);
         }
+
+        [Route("api/users/scroll")]
+        public IActionResult GetScroll(int page)
+        {
+            var pageSize = 15;
+
+            var skip = (page - 1) * pageSize;
+
+            var model = _db.Users.Skip(skip).Take(pageSize);
+            return Ok(model);
+        }
     }
 }

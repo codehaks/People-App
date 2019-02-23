@@ -1,12 +1,89 @@
 ﻿@page
 @{
-    ViewData["Title"] = "Scroll";
+    ViewData["Title"] = "More";
 }
 
-<h2>Scroll</h2>
+<h2>More</h2>
+
+<div id="app" class="text-center" >
+    <table class="table text-left" v-scroll="handleScroll">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(user,index) in users">
+                <td>{{index+1}}</td>
+                <td>{{user.givenname}}</td>
+                <td>{{user.gender}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h6>page : {{page}}</h6>
+
+</div>
 
 @section scripts{
-    <script>
+<script src="~/lib/vue/vue.js"></script>
+<script>
 
-    </script>
+    Vue.directive('scroll', {
+        inserted: function (el, binding) {
+            let f = function (evt) {
+                if (binding.value(evt, el)) {
+                    window.removeEventListener('scroll', f)
+                }
+            }
+            window.addEventListener('scroll', f)
+        }
+    });
+
+    var vue = new Vue({
+        el: "#app",
+        data: {
+            users: [],
+            page: 1
+        },
+        created: function () {
+            this.getPage(1);
+            //this.getPage(2);
+        },
+        methods: {
+            handleScroll: function () {
+                var vm = this;
+                console.log($(window).scrollTop());
+                    console.log($(window).height());
+                console.log($(document).height());
+
+              if($(window).scrollTop() > $(document).height() - 100) {
+
+                    console.log($(window).scrollTop());
+                    console.log($(window).height());
+                    console.log($(document).height());
+                    alert("Hey");
+                    //vm.page++;
+                    //vm.getPage(vm.page);
+                }
+
+            },
+
+            getPage: function (page) {
+                var vm = this;
+                $.ajax({ url: "/api/users/scroll", data: { page: page }, method: "POST" })
+                    .done(function (data) {
+                        vm.users = vm.users.concat(data);
+
+
+                    }).fail(function () {
+
+                    });
+            }
+        }
+
+    })
+</script>
 }
