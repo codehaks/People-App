@@ -16,6 +16,7 @@ namespace PeopleApp.Controllers
             _db = db;
         }
 
+        [Route("api/users")]
         public IActionResult Get(int page)
         {
             var pageSize = 10;
