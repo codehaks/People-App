@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PeopleApp.Data;
@@ -24,6 +25,7 @@ namespace PeopleApp.Controllers
             var skip = (page - 1) * pageSize;
 
             var model = _db.Users.Skip(skip).Take(pageSize);
+            Thread.Sleep(2000);
             return Ok(model);
         }
 

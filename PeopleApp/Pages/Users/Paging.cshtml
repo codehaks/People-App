@@ -6,65 +6,77 @@
 <h2>More</h2>
 
 <div id="app" class="text-center">
-    <table class="table text-left">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(user,index) in users">
-                <td>{{index+1+(page-1)*10}}</td>
-                <td>{{user.givenname}}</td>
-                <td>{{user.gender}}</td>
-            </tr>
-        </tbody>
-    </table>
+    
+    <template v-if="!spinner">
+        <table class="table text-left">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(user,index) in users">
+                    <td>{{index+1+(page-1)*10}}</td>
+                    <td>{{user.givenname}}</td>
+                    <td>{{user.gender}}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <h6>page : {{page}}</h6>
+        <h6>page : {{page}}</h6>
 
-    <button class="btn btn-sm btn-primary" v-on:click="getPrevPage">Prev</button>
-    <button class="btn btn-sm btn-primary" v-on:click="getNextPage">Next</button>
+        <button class="btn btn-sm btn-primary" v-on:click="getPrevPage">Prev</button>
+        <button class="btn btn-sm btn-primary" v-on:click="getNextPage">Next</button>
+
+    </template>
+    <template v-else>
+        <div class="fa fa-5x fa-spinner fa-spin my-5" role="status"></div>
+    </template>
+   
 
 </div>
 
 @section scripts{
-<script src="~/lib/vue/vue.js"></script>
-<script>
-    var vue = new Vue({
-        el: "#app",
-        data: {
-            users: [],
-            page: 1
-        },
-        created: function () {
-            this.getPage(1)
-        },
-        methods: {
-            getPrevPage: function () {
-                if (this.page==1) {
-                    return;
+    <script src="~/lib/vue/vue.js"></script>
+    <script>
+        var vue = new Vue({
+            el: "#app",
+            data: {
+                users: [],
+                page: 1,
+                spinner: false
+            },
+            created: function () {
+                this.getPage(1)
+            },
+            methods: {
+                getPrevPage: function () {
+                    if (this.page == 1) {
+                        return;
+                    }
+                    this.page--;
+                    this.getPage(this.page);
+                },
+                getNextPage: function () {
+                    this.page++;
+                    this.getPage(this.page);
+                },
+                getPage: function (page) {
+                    var vm = this;
+                    vm.spinner = true;
+                    $.ajax({ url: "/api/users", data: { page: page }, method: "POST" })
+                        .done(function (data) {
+                            vm.users = data;
+                        }).fail(function () {
+
+                        }).always(function () {
+                            vm.spinner = false;
+                        });
                 }
-                this.page--;
-                this.getPage(this.page);
-            },
-            getNextPage: function () {
-                this.page++;
-                this.getPage(this.page);
-            },
-            getPage: function (page) {
-                var vm = this;
-                $.ajax({ url: "/api/users", data: { page: page }, method: "POST" })
-                    .done(function (data) {
-                        vm.users = data;
-                    }).fail(function () {
-
-                    });
             }
-        }
 
-    })
-</script>
+        })
+    </script>
 }
