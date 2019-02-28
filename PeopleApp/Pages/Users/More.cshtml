@@ -48,12 +48,11 @@
                 this.page++;
                 this.getPage(this.page);
             },
-            getPage: function (page) {
+            getPage: function (curPage) {
                 var vm = this;
-                $.ajax({ url: "/api/users", data: { page: page }, method: "POST" })
+                $.ajax({ url: "/api/users", data: { page: curPage }, method: "POST" })
                     .done(function (data) {
-                        vm.users =vm.users.concat( data);
-
+                        vm.users = vm.users.concat(data);
 
                     }).fail(function () {
 

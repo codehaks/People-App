@@ -59,8 +59,6 @@
                 $.ajax({ url: "/api/users", data: { page: page }, method: "POST" })
                     .done(function (data) {
                         vm.users = data;
-
-
                     }).fail(function () {
 
                     });
