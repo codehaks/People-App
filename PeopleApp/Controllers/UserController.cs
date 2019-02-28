@@ -25,7 +25,7 @@ namespace PeopleApp.Controllers
             var skip = (page - 1) * pageSize;
 
             var model = _db.Users.Skip(skip).Take(pageSize);
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             return Ok(model);
         }
 
