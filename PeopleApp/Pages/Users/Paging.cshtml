@@ -1,21 +1,14 @@
 ﻿@page
 @{
-    ViewData["Title"] = "More";
+    ViewData["Title"] = "Paging";
 }
 
-<h2>More</h2>
-
+<h1>Pagination</h1>
 <div id="app" class="text-center">
-    
+
     <template v-if="!spinner">
         <table class="table text-left">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
+
             <tbody>
                 <tr v-for="(user,index) in users">
                     <td>{{index+1+(page-1)*10}}</td>
@@ -34,7 +27,7 @@
     <template v-else>
         <div class="fa fa-5x fa-spinner fa-spin my-5" role="status"></div>
     </template>
-   
+
 
 </div>
 
