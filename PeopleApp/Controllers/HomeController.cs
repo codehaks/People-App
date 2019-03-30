@@ -33,6 +33,35 @@ namespace PeopleApp.Controllers
             return Ok(user.Number);
         }
 
+        [Route("test/foreach")]
+        public IActionResult ForEachTest()
+        {
+            var users = _db.Users.Take(100).ToList();
+
+            var count = 0;
+
+            foreach (var item in users)
+            {
+                count++;
+            }
+          
+            return Ok(count);
+        }
+
+        [Route("test/forloop")]
+        public IActionResult ForLoopTest()
+        {
+            var users = _db.Users.Take(100).ToList();
+
+            var count = 0;
+
+            for (int i = 0; i < users.Count(); i++)
+            {
+                count++;
+            }
+
+            return Ok(count);
+        }
 
     }
 }
