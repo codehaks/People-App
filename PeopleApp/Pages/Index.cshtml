@@ -4,4 +4,19 @@
     ViewData["Title"] = "Peoples App";
 }
 
-<h2>People's App</h2>
+<h2>Ppl-App</h2>
+<hr />
+
+<div id="app">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input name="term" placeholder="search" class="form-control" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+@section scripts{
+    <script src="~/lib/vue/vue.js"></script>
+    <script>
+
+    </script>
+}
