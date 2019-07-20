@@ -71,7 +71,11 @@ namespace PeopleApp.Pages
                     
                 }
             }
-            UserList = await _db.Users.Where(u => u.Age >= minAge).Take(10).ToListAsync(cancellationToken);
+            UserList = await _db.Users.Where(u => u.Age >= minAge).Take(1000).ToListAsync(cancellationToken);
+
+            //var top10=UserList.sec
+
+
             _logger.LogWarning("Operation Finished!");
             return Page();
         }
