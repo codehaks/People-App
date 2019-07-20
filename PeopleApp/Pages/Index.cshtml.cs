@@ -27,13 +27,47 @@ namespace PeopleApp.Pages
 
         public IList<User> UserList { get; set; }
 
-        public async Task<IActionResult> OnGet(int minAge,CancellationToken cancellationToken)
+        //public async Task<IActionResult> OnGet(int minAge,CancellationToken cancellationToken)
+        //{
+        //    _logger.LogWarning("Operation Started!");
+        //    await Task.Delay(10_000, cancellationToken);
+
+        //    UserList = await _db.Users.Where(u=>u.Age>=minAge).Take(10).ToListAsync(cancellationToken);
+        //    MinAge = minAge;
+        //    _logger.LogWarning("Operation Finished!");
+        //    return Page();
+        //}
+
+        //public async Task<IActionResult> OnGet(int minAge)
+        //{
+        //    _logger.LogWarning("Operation Started!");
+        //    await Task.Delay(10_000);
+
+        //    UserList = await _db.Users.Where(u => u.Age >= minAge).Take(10).ToListAsync();
+        //    MinAge = minAge;
+        //    _logger.LogWarning("Operation Finished!");
+        //    return Page();
+        //}
+
+        public async Task<IActionResult> OnGet(int minAge, CancellationToken cancellationToken)
         {
-            await Task.Delay(10_000, cancellationToken);
+            _logger.LogWarning("Operation Started!");
 
-            UserList = await _db.Users.Where(u=>u.Age>=minAge).Take(10).ToListAsync(cancellationToken);
-            MinAge = minAge;
+            int counter = 0;
+            while (true)
+            {
+                await Task.Delay(100);
+                counter++;
 
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    _logger.LogWarning($" Counter : {counter} -> Operation canceled!");
+                    break;
+                    
+                }
+            }         
+
+            _logger.LogWarning("Operation Finished!");
             return Page();
         }
     }
