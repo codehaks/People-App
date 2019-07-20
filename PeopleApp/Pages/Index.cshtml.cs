@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -49,9 +50,13 @@ namespace PeopleApp.Pages
         //    return Page();
         //}
 
-        public async Task<IActionResult> OnGet(int minAge, CancellationToken cancellationToken)
+
+          public async Task<IActionResult> OnGet(int minAge, CancellationToken cancellationToken)
         {
             _logger.LogWarning("Operation Started!");
+
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(3000);
 
             int counter = 0;
             while (true)
@@ -59,14 +64,14 @@ namespace PeopleApp.Pages
                 await Task.Delay(100);
                 counter++;
 
-                if (cancellationToken.IsCancellationRequested)
+                if (cancellationToken.IsCancellationRequested || cts.IsCancellationRequested)
                 {
                     _logger.LogWarning($" Counter : {counter} -> Operation canceled!");
                     break;
                     
                 }
-            }         
-
+            }
+            UserList = await _db.Users.Where(u => u.Age >= minAge).Take(10).ToListAsync(cancellationToken);
             _logger.LogWarning("Operation Finished!");
             return Page();
         }
