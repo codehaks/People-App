@@ -14,25 +14,9 @@ namespace PeopleApp.Controllers
         }
         public IActionResult Index()
         {
-            var model = _db.Users.Take(10).Select(u => new { u.Givenname, u.Surname, u.Age, u.Country });
+            var model = _db.Users.Take(10);
             return Ok(model);
         }
-
-        [Route("user/order/age")]
-        public IActionResult OrderByAge()
-        {
-            var model = _db.Users.OrderByAge(true).Take(10).Select(u => new { u.Givenname, u.Surname, u.Age, u.Country });
-            return Ok(model);
-        }
-
-        [Route("user/create")]
-        public IActionResult Create()
-        {
-            var user=_db.Users.CreateByName("Hakim");
-            _db.SaveChanges();
-            return Ok(user.Number);
-        }
-
 
     }
 }

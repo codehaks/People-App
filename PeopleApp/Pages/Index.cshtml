@@ -4,4 +4,26 @@
     ViewData["Title"] = "Peoples App";
 }
 
-<h2>People's App</h2>
+<h2>Customers</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var user in Model.UserList)
+        {
+            <tr>
+                <td>@user.Number</td>
+                <td>@user.Surname @user.Maidenname</td>
+                <td>@user.Age</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
