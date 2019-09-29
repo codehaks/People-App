@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleApp", "PeopleApp\PeopleApp.csproj", "{59645F6B-7D7F-49BF-8F7F-82A5AAD37E0D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codehaks.TagHelpers", "..\..\Archive\Nuget\Codehaks.TagHelpers\Codehaks.TagHelpers\Codehaks.TagHelpers.csproj", "{94AF0F1E-C46E-45F0-B149-A2E8525B5F28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codehaks.Pagination", "..\..\Dev\Nuget\TagHelpers\Pagination\Pagination\Codehaks.Pagination\Codehaks.Pagination.csproj", "{4D88AD23-6D93-4084-862D-894525D10A3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{59645F6B-7D7F-49BF-8F7F-82A5AAD37E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59645F6B-7D7F-49BF-8F7F-82A5AAD37E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59645F6B-7D7F-49BF-8F7F-82A5AAD37E0D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{94AF0F1E-C46E-45F0-B149-A2E8525B5F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94AF0F1E-C46E-45F0-B149-A2E8525B5F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94AF0F1E-C46E-45F0-B149-A2E8525B5F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94AF0F1E-C46E-45F0-B149-A2E8525B5F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D88AD23-6D93-4084-862D-894525D10A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D88AD23-6D93-4084-862D-894525D10A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D88AD23-6D93-4084-862D-894525D10A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D88AD23-6D93-4084-862D-894525D10A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
