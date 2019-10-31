@@ -28,17 +28,6 @@ namespace PeopleApp.Pages
 
         public IList<User> UserList { get; set; }
 
-        //public async Task<IActionResult> OnGet(int minAge,CancellationToken cancellationToken)
-        //{
-        //    _logger.LogWarning("Operation Started!");
-        //    await Task.Delay(10_000, cancellationToken);
-
-        //    UserList = await _db.Users.Where(u=>u.Age>=minAge).Take(10).ToListAsync(cancellationToken);
-        //    MinAge = minAge;
-        //    _logger.LogWarning("Operation Finished!");
-        //    return Page();
-        //}
-
         //public async Task<IActionResult> OnGet(int minAge)
         //{
         //    _logger.LogWarning("Operation Started!");
@@ -50,8 +39,22 @@ namespace PeopleApp.Pages
         //    return Page();
         //}
 
+        //public async Task<IActionResult> OnGet(int minAge, CancellationToken cancellationToken)
+        //{
+        //    _logger.LogWarning("Operation Started!");
+        //    await Task.Delay(10_000, cancellationToken);
 
-          public async Task<IActionResult> OnGet(int minAge, CancellationToken cancellationToken)
+        //    UserList = await _db.Users.Where(u => u.Age >= minAge)
+        //        .Take(10)
+        //        .ToListAsync(cancellationToken);
+
+        //    MinAge = minAge;
+        //    _logger.LogWarning("Operation Finished!");
+        //    return Page();
+        //}
+
+
+        public async Task<IActionResult> OnGet(int minAge, CancellationToken cancellationToken)
         {
             _logger.LogWarning("Operation Started!");
 
@@ -68,13 +71,13 @@ namespace PeopleApp.Pages
                 {
                     _logger.LogWarning($" Counter : {counter} -> Operation canceled!");
                     break;
-                    
+
                 }
             }
-            UserList = await _db.Users.Where(u => u.Age >= minAge).Take(1000).ToListAsync(cancellationToken);
 
-            //var top10=UserList.sec
-
+            UserList = await _db.Users.Where(u => u.Age >= minAge)
+                .Take(1000)
+                .ToListAsync(cancellationToken);
 
             _logger.LogWarning("Operation Finished!");
             return Page();
