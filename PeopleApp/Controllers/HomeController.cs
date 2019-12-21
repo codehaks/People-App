@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyProfile.Common;
 using PeopleApp.Common;
 using PeopleApp.Data;
 using System;
@@ -32,8 +33,14 @@ namespace PeopleApp.Controllers
         [Route("user/old/exp")]
         public IActionResult Index3()
         {
-            var model = _db.Users.Where(IsOldUser).Select(u => new { u.Givenname, u.Surname, u.Age, u.Country });
-            return Ok(model);
+            var s1 = new Specs.MinAgeSpec(20);
+            var s2 = new Specs.MaxAgeSpec(30);
+
+            var s3 = s1.And(s2);
+
+            var model = _db.Users.Where(s3.ToExpression())
+                .Select(u => new { u.Givenname, u.Surname, u.Age, u.Country });
+            return Ok(model.ToList());
         }
 
         private Expression<Func<User, bool>> IsOldUser
