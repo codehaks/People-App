@@ -26,7 +26,8 @@ namespace PeopleApp.Controllers
         [Route("user/old/filter")]
         public IActionResult Index2()
         {
-            var model = _db.Users.Where(u => OldUsers(u)).Select(u => new { u.Givenname, u.Surname, u.Age, u.Country });
+            var model = _db.Users.Where(u => OldUsers(u))
+                .Select(u => new { u.Givenname, u.Surname, u.Age, u.Country });
             return Ok(model);
         }
 
@@ -36,9 +37,9 @@ namespace PeopleApp.Controllers
             var s1 = new Specs.MinAgeSpec(20);
             var s2 = new Specs.MaxAgeSpec(30);
 
-            var s3 = s1.And(s2);
+            var AgeBetween20and30 = s1.And(s2);
 
-            var model = _db.Users.Where(s3.ToExpression())
+            var model = _db.Users.Where(AgeBetween20and30.ToExpression())
                 .Select(u => new { u.Givenname, u.Surname, u.Age, u.Country });
             return Ok(model.ToList());
         }
