@@ -14,7 +14,7 @@ namespace PeopleApp.Controllers
         }
         public IActionResult Index()
         {
-            var model = _db.Users.Take(10);
+            var model = _db.Users.OrderBy(u=>u.Maidenname).Take(10);
             return Ok(model);
         }
 

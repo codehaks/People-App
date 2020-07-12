@@ -22,7 +22,7 @@ namespace PeopleApp.Pages
         public IList<User> UserList { get; set; }
         public void OnGet()
         {
-            UserList = _db.Users.Take(10).ToList();
+            UserList = _db.Users.OrderBy(u=>u.Maidenname).Take(10).ToList();
         }
     }
 }
