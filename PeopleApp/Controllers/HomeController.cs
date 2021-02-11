@@ -19,22 +19,24 @@ namespace PeopleApp.Controllers
         public IActionResult Index() =>
              Ok(_db.Users.OrderBy(u => u.Maidenname).Take(10));
 
+        [Route("api/map")]
+        public IActionResult IndexMap() =>
+           Ok(_db.Users.OrderBy(u => u.Maidenname).Take(10));
+
         [Route("get")]
         public IActionResult Get()
         {
             var data = new List<string>();
-            using (var command = _db.Database.GetDbConnection().CreateCommand())
+            using var command = _db.Database.GetDbConnection().CreateCommand();
+            command.CommandText = "SELECT gender,givenname,age FROM Users LIMIT 10";
+            _db.Database.OpenConnection();
+
+            using var result = command.ExecuteReader();
+            while (result.Read())
             {
-                command.CommandText = "SELECT gender,givenname,age FROM Users LIMIT 10";
-                _db.Database.OpenConnection();
-                using (var result = command.ExecuteReader())
-                {
-                    while (result.Read())
-                    {
-                        data.Add(result.GetString(0) + " - " + result.GetString(1) + " - " + result.GetString(2));
-                    }
-                }
+                data.Add(result.GetString(0) + " - " + result.GetString(1) + " - " + result.GetString(2));
             }
+
             return Ok(data);
         }
 
