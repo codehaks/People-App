@@ -11,17 +11,24 @@ namespace PeopleApp.Controllers
     public class HomeController : Controller
     {
         private readonly PeopleDbContext _db;
-        public HomeController(PeopleDbContext db)
-        {
-            _db = db;
-        }
+
+        public HomeController(PeopleDbContext db) => _db = db;
+
 
         [Route("user/old/normal")]
         public IActionResult Index()
-        {
-            var model = _db.Users.Where(u => u.Age > 70).Select(u => new { u.Givenname, u.Surname, u.Age, u.Country });
-            return Ok(model);
-        }
+
+            => Ok(_db
+                .Users
+                .Where(u => u.Age > 70)
+                .Select(u => new
+                {
+                    u.Givenname,
+                    u.Surname,
+                    u.Age,
+                    u.Country
+                }));
+        
 
         [Route("user/old/filter")]
         public IActionResult Index2()
