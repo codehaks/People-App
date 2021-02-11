@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mapster;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PeopleApp.Common;
 using PeopleApp.Data;
@@ -19,9 +20,23 @@ namespace PeopleApp.Controllers
         public IActionResult Index() =>
              Ok(_db.Users.OrderBy(u => u.Maidenname).Take(10));
 
-        [Route("api/map")]
-        public IActionResult IndexMap() =>
-           Ok(_db.Users.OrderBy(u => u.Maidenname).Take(10));
+        [Route("api/project")]
+        public IActionResult IndexProject() =>
+           Ok(_db.Users.Take(10).ProjectToType<UserInfo>());
+
+        [Route("api/adapt")]
+        public IActionResult IndexAdapt()
+        {
+            var model = _db.Users.First().Adapt<UserInfo>();
+            return Ok(model);
+        }
+        public class UserInfo
+        {
+            public string Title { get; set; }
+            public string Givenname { get; set; }
+            public string Middleinitial { get; set; }
+            public string Surname { get; set; }
+        }
 
         [Route("get")]
         public IActionResult Get()
